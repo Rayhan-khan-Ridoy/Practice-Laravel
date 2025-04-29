@@ -8,7 +8,7 @@ class MangoController extends Controller
  {
     
     public function giveMango(){
-        return "100 mangoes";
+        return "I ate 100 mangoes";
     }
 
     // public function giveMango(){
