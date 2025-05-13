@@ -14,16 +14,24 @@ class LoginController extends Controller
     public function loginVerify(Request $request){
         
         // $user=new User();
+        
         $myUser= User::where('email',$request->email)->first();
         // dd($myUser);
         //  dd($myUser);
+        if ($myUser == null){   //username does not exist
+            session()->flush();
+            session(['loginError'=>'Email does not exist. Please note that both fields may be case-sensitive.']);
+            return redirect()->back();
+        } 
         if ($request->email == $myUser->email && Hash::check($request->password, $myUser->password)) {
             session()->flush();
             session(['authUser'=>'User is verified']);
             session(['userName'=>$myUser->name]);
             // session()->put('mango',"mango is sweet");
            return view('userDashboard');
-        }else{
+        }else{  //wrong password
+            session()->flush();
+            session(['loginError'=>'Please enter a correct username and password. ']);
             return redirect()->back();
         }
         
